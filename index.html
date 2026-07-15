@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>秒镜AI - AI视频提示词生成器</title>
+  <title>秒镜AI - AI视频导演工作台</title>
   <style>
     * {
       box-sizing: border-box;
@@ -11,226 +11,106 @@
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
-      background: radial-gradient(circle at top, #2b2118 0%, #090909 45%, #000 100%);
-      color: #f8f1e7;
-      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #0f1117;
+      color: #f5f7fb;
+      line-height: 1.6;
     }
 
-    .container {
-      width: 100%;
+    .page {
       max-width: 760px;
       margin: 0 auto;
       padding: 20px 16px 40px;
     }
 
     .hero {
-      padding: 28px 0 22px;
-      text-align: center;
+      padding: 28px 0 18px;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 6px 12px;
-      border: 1px solid rgba(255, 196, 87, 0.45);
-      color: #ffd889;
-      border-radius: 999px;
-      font-size: 12px;
-      margin-bottom: 14px;
-      background: rgba(255, 196, 87, 0.08);
+    .brand {
+      font-size: 15px;
+      color: #8ea4ff;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
     h1 {
       margin: 0;
       font-size: 32px;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, #fff2c7, #d8a949, #fff0b3);
-      -webkit-background-clip: text;
-      color: transparent;
+      line-height: 1.18;
+      letter-spacing: 0;
     }
 
     .subtitle {
-      margin: 12px auto 0;
-      color: #cfc3b2;
-      font-size: 14px;
-      line-height: 1.7;
-      max-width: 520px;
+      margin: 14px 0 0;
+      color: #b8c0d9;
+      font-size: 16px;
     }
 
-    .card {
-      background: rgba(20, 20, 20, 0.78);
-      border: 1px solid rgba(255, 217, 140, 0.16);
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(14px);
-    }
-
-    .card-title {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 14px;
-      color: #ffe4a3;
+    .panel {
+      background: #171b25;
+      border: 1px solid #2a3142;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
     }
 
     label {
       display: block;
-      font-size: 13px;
-      color: #d6c5a8;
-      margin: 14px 0 7px;
+      font-size: 14px;
+      color: #d9def0;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
     textarea,
     select,
     input {
       width: 100%;
-      border: 1px solid rgba(255, 217, 140, 0.18);
-      border-radius: 12px;
+      border: 1px solid #384156;
+      background: #0f131d;
+      color: #ffffff;
+      border-radius: 8px;
       padding: 12px;
-      background: rgba(255, 255, 255, 0.055);
-      color: #fff6e8;
-      outline: none;
       font-size: 15px;
+      outline: none;
     }
 
     textarea {
       min-height: 110px;
       resize: vertical;
-      line-height: 1.6;
     }
 
-    select option {
-      background: #161616;
-      color: #fff;
+    textarea:focus,
+    select:focus,
+    input:focus {
+      border-color: #6d83ff;
+      box-shadow: 0 0 0 3px rgba(109, 131, 255, 0.18);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    @media (max-width: 520px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-    }
-
-    .btn {
-      width: 100%;
-      border: none;
-      border-radius: 14px;
-      padding: 15px 16px;
-      margin-top: 18px;
-      background: linear-gradient(135deg, #f8d27a, #b98225);
-      color: #17110a;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 10px 28px rgba(214, 155, 51, 0.26);
-    }
-
-    .btn:active {
-      transform: scale(0.99);
-    }
-
-    .small-btn {
-      border: 1px solid rgba(255, 217, 140, 0.22);
-      background: rgba(255, 255, 255, 0.06);
-      color: #ffe6ad;
-      padding: 8px 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    .result-section {
+      grid-template-columns: 1fr;
+      gap: 14px;
       margin-top: 14px;
-      border-top: 1px solid rgba(255, 217, 140, 0.12);
-      padding-top: 14px;
     }
 
-    .result-head {
+    .examples {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .result-head h3 {
-      margin: 0;
-      font-size: 15px;
-      color: #ffdfa1;
-    }
-
-    .result-box {
-      white-space: pre-wrap;
-      word-break: break-word;
-      background: rgba(255, 255, 255, 0.055);
-      border: 1px solid rgba(255, 217, 140, 0.12);
-      border-radius: 12px;
-      padding: 13px;
-      line-height: 1.75;
-      font-size: 14px;
-      color: #f5ead7;
-    }
-
-    .tips {
-      font-size: 12px;
-      line-height: 1.7;
-      color: #a99b86;
-      margin-top: 10px;
-    }
-
-    .footer {
-      text-align: center;
-      color: #776d5f;
-      font-size: 12px;
-      margin-top: 22px;
-    }
-
-    .empty {
-      color: #9f9382;
-      font-size: 14px;
-      text-align: center;
-      padding: 22px 8px;
-    }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 28px;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.86);
-      color: #ffe2a3;
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      display: none;
-      z-index: 999;
-      border: 1px solid rgba(255, 217, 140, 0.18);
-    }
-
-    .quick-examples {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0 2px;
       margin-top: 10px;
     }
 
     .chip {
-      border: 1px solid rgba(255, 217, 140, 0.18);
-      color: #f2d396;
-      background: rgba(255, 255, 255, 0.045);
-      padding: 7px 10px;
+      white-space: nowrap;
+      border: 1px solid #384156;
+      background: #101521;
+      color: #dce3ff;
       border-radius: 999px;
-      font-size: 12px;
+      padding: 8px 12px;
+      font-size: 13px;
       cursor: pointer;
     }
 
@@ -238,420 +118,217 @@
       transform: scale(0.98);
     }
 
-    .top-actions {
+    .primary-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 8px;
+      padding: 15px 16px;
+      margin-top: 18px;
+      background: linear-gradient(135deg, #6d83ff, #19c7a8);
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .primary-btn:active {
+      transform: translateY(1px);
+    }
+
+    .result-title {
       display: flex;
-      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .result-title h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .copy-all {
+      border: 1px solid #384156;
+      background: #101521;
+      color: #dce3ff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .result-block {
+      background: #101521;
+      border: 1px solid #283147;
+      border-radius: 8px;
+      padding: 14px;
       margin-top: 12px;
     }
 
-    .top-actions .small-btn {
-      flex: 1;
-      padding: 11px 10px;
+    .block-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .block-head h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #ffffff;
+    }
+
+    .copy-btn {
+      border: 1px solid #384156;
+      background: #171b25;
+      color: #dce3ff;
+      border-radius: 8px;
+      padding: 6px 9px;
+      font-size: 12px;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .content {
+      white-space: pre-wrap;
+      color: #cfd7ef;
+      font-size: 14px;
+    }
+
+    .empty {
+      color: #8d98b8;
+      font-size: 14px;
+      padding: 14px 0 2px;
+    }
+
+    .note {
+      color: #8d98b8;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    @media (min-width: 680px) {
+      .page {
+        padding-top: 32px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <main class="page">
     <section class="hero">
-      <div class="badge">AI视频导演提示词工具</div>
-      <h1>秒镜AI</h1>
-      <p class="subtitle">
-        输入一个视频想法，自动生成首帧图提示词、视频提示词、分镜脚本、表演提示词和平台发布文案。
-      </p>
+      <div class="brand">秒镜AI</div>
+      <h1>AI视频导演工作台</h1>
+      <p class="subtitle">输入一句想法，自动生成首帧图、视频提示词、分镜脚本、表演提示词和发布文案。</p>
     </section>
 
-    <section class="card">
-      <div class="card-title">一、输入你的创意</div>
+    <section class="panel">
+      <label for="idea">你的视频创意</label>
+      <textarea id="idea" placeholder="例如：雨夜里，长大的女儿终于理解了沉默的父亲"></textarea>
 
-      <label>视频创意</label>
-      <textarea id="idea" placeholder="例如：雨夜，父女和解，10秒，感人，电影感"></textarea>
-
-      <div class="quick-examples">
-        <span class="chip" onclick="useExample('雨夜，父女和解，10秒，感人')">雨夜父女和解</span>
-        <span class="chip" onclick="useExample('老奶奶在车站等一个不会再回来的人，催泪，10秒')">车站催泪故事</span>
-        <span class="chip" onclick="useExample('年轻人深夜加班后收到母亲语音，温暖治愈，15秒')">深夜母亲语音</span>
-        <span class="chip" onclick="useExample('一只流浪狗在雨中守着旧主人留下的围巾，感人，10秒')">流浪狗守围巾</span>
+      <div class="examples">
+        <button class="chip" onclick="setExample('雨夜里，长大的女儿终于理解了沉默的父亲')">雨夜父女和解</button>
+        <button class="chip" onclick="setExample('一只流浪狗守着主人留下的旧围巾，直到冬天过去')">流浪狗守护围巾</button>
+        <button class="chip" onclick="setExample('老人每天去车站等一个不会再回来的人')">老人车站等人</button>
+        <button class="chip" onclick="setExample('女孩收到十年前没有送出的道歉信')">迟来的道歉信</button>
+        <button class="chip" onclick="setExample('母亲深夜听到孩子很久以前发来的语音留言')">母亲深夜语音</button>
       </div>
 
       <div class="grid">
         <div>
-          <label>视频时长</label>
+          <label for="duration">视频时长</label>
           <select id="duration">
-            <option value="5秒">5秒</option>
-            <option value="10秒" selected>10秒</option>
-            <option value="15秒">15秒</option>
-            <option value="30秒">30秒</option>
-            <option value="60秒">60秒</option>
+            <option>10秒</option>
+            <option>15秒</option>
+            <option>30秒</option>
+            <option>60秒</option>
           </select>
         </div>
 
         <div>
-          <label>画面比例</label>
+          <label for="ratio">画面比例</label>
           <select id="ratio">
-            <option value="竖屏9:16" selected>竖屏9:16</option>
-            <option value="横屏16:9">横屏16:9</option>
-            <option value="方屏1:1">方屏1:1</option>
+            <option>9:16 竖屏</option>
+            <option>16:9 横屏</option>
+            <option>1:1 方屏</option>
           </select>
         </div>
 
         <div>
-          <label>视频风格</label>
+          <label for="style">视频风格</label>
           <select id="style">
-            <option value="电影级写实" selected>电影级写实</option>
-            <option value="国风美学">国风美学</option>
-            <option value="赛博朋克">赛博朋克</option>
-            <option value="日系治愈">日系治愈</option>
-            <option value="悬疑压迫">悬疑压迫</option>
-            <option value="高级广告片">高级广告片</option>
-            <option value="纪录片真实感">纪录片真实感</option>
+            <option>电影级写实</option>
+            <option>治愈短片</option>
+            <option>高级广告片</option>
+            <option>纪录片质感</option>
+            <option>国风美学</option>
           </select>
         </div>
 
         <div>
-          <label>情绪类型</label>
-          <select id="emotion">
-            <option value="感人催泪" selected>感人催泪</option>
-            <option value="温暖治愈">温暖治愈</option>
-            <option value="遗憾心酸">遗憾心酸</option>
-            <option value="悬疑紧张">悬疑紧张</option>
-            <option value="高燃反转">高燃反转</option>
-            <option value="浪漫克制">浪漫克制</option>
-            <option value="孤独破碎">孤独破碎</option>
+          <label for="mood">情绪类型</label>
+          <select id="mood">
+            <option>感人</option>
+            <option>遗憾</option>
+            <option>温暖</option>
+            <option>震撼</option>
+            <option>悬疑</option>
           </select>
         </div>
 
         <div>
-          <label>目标平台</label>
+          <label for="platform">目标平台</label>
           <select id="platform">
-            <option value="抖音" selected>抖音</option>
-            <option value="小红书">小红书</option>
-            <option value="视频号">视频号</option>
-            <option value="快手">快手</option>
-            <option value="B站">B站</option>
+            <option>抖音</option>
+            <option>小红书</option>
+            <option>视频号</option>
+            <option>B站</option>
+            <option>快手</option>
           </select>
         </div>
 
         <div>
-          <label>主角类型</label>
-          <select id="character">
-            <option value="普通人真实表演" selected>普通人真实表演</option>
-            <option value="年轻女性">年轻女性</option>
-            <option value="年轻男性">年轻男性</option>
-            <option value="老人">老人</option>
-            <option value="父女">父女</option>
-            <option value="母子">母子</option>
-            <option value="情侣">情侣</option>
-            <option value="宠物">宠物</option>
+          <label for="role">主角类型</label>
+          <select id="role">
+            <option>普通人</option>
+            <option>父亲</option>
+            <option>母亲</option>
+            <option>女孩</option>
+            <option>老人</option>
+            <option>宠物</option>
           </select>
         </div>
       </div>
 
-      <button class="btn" onclick="generatePrompt()">生成视频提示词</button>
-
-      <div class="top-actions">
-        <button class="small-btn" onclick="clearAll()">清空内容</button>
-        <button class="small-btn" onclick="copyAll()">复制全部结果</button>
-      </div>
-
-      <p class="tips">
-        提示：这个版本是纯前端模板生成，不消耗积分。后面如果接入 DeepSeek、通义、豆包等 API，就可以升级成真正 AI 生成版。
-      </p>
+      <button class="primary-btn" onclick="generatePrompt()">一键生成电影级提示词</button>
     </section>
 
-    <section class="card">
-      <div class="card-title">二、生成结果</div>
-      <div id="result">
-        <div class="empty">生成后，结果会显示在这里。</div>
+    <section class="panel" id="resultPanel">
+      <div class="result-title">
+        <h2>生成结果</h2>
+        <button class="copy-all" onclick="copyAll()">复制完整方案</button>
       </div>
+
+      <div id="empty" class="empty">生成后，完整 AI 视频方案会显示在这里。</div>
+      <div id="results"></div>
     </section>
 
-    <div class="footer">
-      秒镜AI · 纯前端MVP版本 · 不需要积分也能跑
-    </div>
-  </div>
-
-  <div id="toast" class="toast">已复制</div>
+    <p class="note">秒镜AI 当前为免费模板版，适合快速生成 AI 视频创作方案。</p>
+  </main>
 
   <script>
-    let allResultText = "";
+    let fullText = "";
 
-    function showToast(text) {
-      const toast = document.getElementById("toast");
-      toast.innerText = text || "已复制";
-      toast.style.display = "block";
-      setTimeout(() => {
-        toast.style.display = "none";
-      }, 1600);
-    }
-
-    function useExample(text) {
-      document.getElementById("idea").value = text;
-      showToast("已填入示例");
-    }
-
-    function getValue(id) {
-      return document.getElementById(id).value.trim();
-    }
-
-    function generatePrompt() {
-      const idea = getValue("idea") || "一个普通人在深夜经历情绪转折的故事";
-      const duration = getValue("duration");
-      const ratio = getValue("ratio");
-      const style = getValue("style");
-      const emotion = getValue("emotion");
-      const platform = getValue("platform");
-      const character = getValue("character");
-
-      const title = makeTitle(idea, emotion);
-
-      const concept = `这是一个关于「${idea}」的${duration}短片。整体风格为${style}，情绪基调是${emotion}。故事重点不是靠夸张台词推动，而是通过人物眼神、呼吸、停顿、手部动作和环境细节，让观众在短时间内感受到真实情绪。`;
-
-      const firstFrame = `首帧图提示词：
-
-${style}画面，${ratio}，主题为「${idea}」。画面中心是${character}，处在一个具有强情绪氛围的真实场景中。人物表情克制，眼神里有未说出口的情绪，身体动作自然，像是在某个重要瞬间被镜头捕捉。
-
-构图采用中近景或特写，主体清晰，背景轻微虚化，环境中有可反射情绪的细节，比如雨水、路灯、窗户、旧物、影子或空旷空间。光线柔和但有层次，低饱和色调，真实皮肤质感，电影感浅景深，高情绪张力，不夸张，不摆拍。`;
-
-      const videoPrompt = `视频生成提示词：
-
-${style}短片，${ratio}，时长${duration}。故事主题为「${idea}」。画面从一个安静但有情绪暗示的环境细节开始，比如地面反光、微弱灯光、人物手部动作、被风吹动的衣角或一个旧物特写。
-
-镜头缓慢推进到${character}。人物先保持沉默，眼神有躲闪和压抑，呼吸变浅，嘴角轻微颤动，像是想说什么却没有说出口。随后情绪逐渐松动，眼眶泛红，手指轻轻攥紧，身体微微前倾。最后人物用一个很小的动作完成情绪释放，比如低头、抬眼、轻轻触碰、无声落泪或停顿凝视。
-
-表演要求真实克制，不要喊叫，不要夸张哭泣，不要舞台化表演。重点通过眼神、呼吸、嘴角、手指和身体细节表现${emotion}。镜头运动缓慢自然，画面稳定，浅景深，真实光影，低饱和胶片质感，情绪递进清晰，结尾留下余味。`;
-
-      const shotList = `分镜脚本：
-
-1.【0-2秒】
-画面：环境细节入场，出现雨水、灯光、旧物、空椅子或人物手部特写。
-表演：人物暂时不说话，只通过细小动作暗示情绪。
-运镜：低机位或近景缓慢推进。
-情绪：压抑、安静、有悬念。
-
-2.【2-5秒】
-画面：镜头切到${character}的面部或侧脸。
-表演：眼神躲闪，呼吸变浅，嘴角轻微颤动。
-运镜：中近景慢慢靠近。
-情绪：情绪开始松动。
-
-3.【5-8秒】
-画面：人物看到某个触发情绪的细节或对象。
-表演：手指微微发抖，眼眶发红，想说话但停住。
-运镜：特写，轻微推近。
-情绪：心酸、克制、即将爆发。
-
-4.【8-${duration}】
-画面：人物完成一个很小但很有力量的动作，比如低头、抬眼、握住对方的手、贴近旧物或无声落泪。
-表演：情绪释放但不夸张，保持真实。
-运镜：缓慢定格或轻轻拉远。
-情绪：${emotion}，留下余味。`;
-
-      const acting = `表演提示词：
-
-人物表演要像真实生活中被突然击中的瞬间，而不是表演给镜头看。
-
-眼神：先回避，再迟疑地看向关键对象，最后眼眶泛红但不立刻大哭。
-呼吸：从平稳变浅，关键瞬间轻微停顿。
-嘴角：轻微颤动，像是想说话但忍住。
-手部：手指轻轻攥紧衣角、旧物或对方的手，动作幅度小。
-身体：肩膀微微下沉，身体略微前倾，表现内心松动。
-情绪递进：压抑 → 触动 → 克制 → 释放 → 余味。
-禁忌：不要夸张哭喊，不要用力皱眉，不要机械式流泪，不要偶像剧式表演。`;
-
-      const camera = `镜头语言：
-
-采用电影级慢节奏运镜。开头用环境细节建立氛围，中段用中近景捕捉人物状态，高潮用面部特写表现微表情。焦段建议使用50mm或85mm质感，浅景深，背景虚化但保留环境信息。镜头不要频繁切换，尽量用缓慢推进、轻微跟拍或稳定定格，让观众有时间进入情绪。`;
-
-      const light = `光影与美术风格：
-
-整体采用${style}。色彩低饱和，光线柔和，有明显明暗层次。环境中可以加入暖黄色灯光、冷色窗光、雨夜反光、旧物纹理、墙面阴影等细节。服装尽量生活化，不要过度精致。道具要有记忆点，比如旧照片、车票、围巾、手机语音、钥匙、信封、玩具或一件旧衣服。`;
-
-      const negative = `负面提示词：
-
-不要卡通风，不要动漫感，不要塑料皮肤，不要夸张表演，不要表情僵硬，不要五官变形，不要多余手指，不要错误肢体，不要机械动作，不要画面闪烁，不要过度磨皮，不要过曝，不要低清晰度，不要文字乱码，不要水印，不要镜头乱晃，不要无意义空镜，不要假哭。`;
-
-      const copy = makePlatformCopy(platform, idea, emotion);
-
-      allResultText =
-`【视频标题】
-${title}
-
-【创意概述】
-${concept}
-
-【首帧图提示词】
-${firstFrame}
-
-【视频生成提示词】
-${videoPrompt}
-
-【分镜脚本】
-${shotList}
-
-【表演提示词】
-${acting}
-
-【镜头语言】
-${camera}
-
-【光影与美术风格】
-${light}
-
-【负面提示词】
-${negative}
-
-【平台发布文案】
-${copy}`;
-
-      const html = `
-        ${sectionHtml("视频标题", title)}
-        ${sectionHtml("创意概述", concept)}
-        ${sectionHtml("首帧图提示词", firstFrame)}
-        ${sectionHtml("视频生成提示词", videoPrompt)}
-        ${sectionHtml("分镜脚本", shotList)}
-        ${sectionHtml("表演提示词", acting)}
-        ${sectionHtml("镜头语言", camera)}
-        ${sectionHtml("光影与美术风格", light)}
-        ${sectionHtml("负面提示词", negative)}
-        ${sectionHtml("平台发布文案", copy)}
-      `;
-
-      document.getElementById("result").innerHTML = html;
-      showToast("生成完成");
-    }
-
-    function sectionHtml(title, text) {
-      const safeText = escapeHtml(text);
-      return `
-        <div class="result-section">
-          <div class="result-head">
-            <h3>${title}</h3>
-            <button class="small-btn" onclick="copyText(\`${escapeForTemplate(text)}\`)">复制</button>
-          </div>
-          <div class="result-box">${safeText}</div>
-        </div>
-      `;
-    }
-
-    function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        showToast("已复制");
-      }).catch(() => {
-        showToast("复制失败，请手动长按复制");
-      });
-    }
-
-    function copyAll() {
-      if (!allResultText) {
-        showToast("请先生成内容");
-        return;
-      }
-      copyText(allResultText);
-    }
-
-    function clearAll() {
-      document.getElementById("idea").value = "";
-      document.getElementById("result").innerHTML = '<div class="empty">生成后，结果会显示在这里。</div>';
-      allResultText = "";
-      showToast("已清空");
-    }
-
-    function makeTitle(idea, emotion) {
-      if (emotion.includes("感人") || emotion.includes("催泪")) {
-        return "有些话，说晚了就成了遗憾";
-      }
-      if (emotion.includes("治愈")) {
-        return "那一刻，我突然被生活抱了一下";
-      }
-      if (emotion.includes("悬疑")) {
-        return "他回头的那一秒，真相变了";
-      }
-      if (emotion.includes("高燃")) {
-        return "沉默的人，最后赢了一次";
-      }
-      if (emotion.includes("浪漫")) {
-        return "我没说爱你，但镜头都知道";
-      }
-      return "这一幕，比台词更有力量";
-    }
-
-    function makePlatformCopy(platform, idea, emotion) {
-      if (platform === "小红书") {
-        return `标题：后悔没早点学会这种AI视频情绪拍法
-
-正文：
-这个短片主题是「${idea}」。
-真正打动人的不是大哭大喊，而是那些很小的细节：一个停顿、一次抬眼、手指轻轻发抖、话到嘴边又咽回去。
-
-如果你也在做AI视频，可以试试这个结构：
-1. 先用环境细节开场
-2. 再用人物微表情推进
-3. 中段给一个情绪触发点
-4. 最后用无声动作收尾
-
-标签：
-#AI视频 #AI提示词 #首帧图提示词 #视频生成 #短片创作 #电影感 #小红书创作`;
-      }
-
-      if (platform === "视频号") {
-        return `标题：真正催泪的，从来不是哭出来的那一刻
-
-正文：
-有些情绪，越克制越有力量。
-这个故事讲的是「${idea}」。
-没有夸张表演，没有用力煽情，只靠一个眼神、一次沉默、一个细微动作，把${emotion}留在观众心里。
-
-标签：
-#AI视频创作 #情绪短片 #视频号短片 #电影感短片`;
-      }
-
-      if (platform === "B站") {
-        return `标题：用AI做一条有演员级表演的情绪短片
-
-简介：
-本片主题：「${idea}」。
-核心创作方法是用镜头语言和微表情推动情绪，而不是靠直白台词。重点设计了环境细节、人物动作、情绪递进和结尾余味，适合AI视频创作者参考。
-
-标签：
-AI视频 / Prompt / 分镜脚本 / 电影感 / 短片创作`;
-      }
-
-      if (platform === "快手") {
-        return `标题：这一幕，越看越不是滋味
-
-正文：
-故事是「${idea}」。
-没有大哭大闹，就是一个很小的动作，却把人看沉默了。
-
-标签：
-#AI视频 #真实情绪 #感人短片 #生活故事`;
-      }
-
-      return `标题：这条AI短片，最后3秒真的有点顶
-
-正文：
-主题：「${idea}」。
-真正有感染力的AI视频，不是画面多炫，而是人物像真的在经历这一刻。
-眼神、呼吸、停顿、手部动作，这些细节才是情绪的关键。
-
-标签：
-#AI视频 #AI提示词 #电影感短片 #首帧图 #视频生成 #分镜脚本`;
-    }
-
-    function escapeHtml(text) {
-      return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-    }
-
-    function escapeForTemplate(text) {
-      return text
-        .replace(/\\/g, "\\\\")
-        .replace(/`/g, "\\`")
-        .replace(/\$/g, "\\$")
-        .replace(/<\/script>/g, "<\\/script>");
-    }
-  </script>
-</body>
-</html>
+    function setExample(text) {
+      document
